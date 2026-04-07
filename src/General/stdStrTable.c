@@ -1,5 +1,7 @@
 #include "stdStrTable.h"
 
+#include <wchar.h>
+#include <wctype.h>
 #include "stdPlatform.h"
 #include "General/stdString.h"
 #include "jk.h"
@@ -272,11 +274,11 @@ int stdStrTable_ParseUniLine(stdFile_t fhand, wchar_t *buf)
     do
     {
         std_pHS->fileGetws(fhand, buf, 10);
-        if ( !_wcschr(buf, L'\n') )
+        if ( !__wcschr(buf, L'\n') )
         {
             do
                 std_pHS->fileGetws(fhand, tmpBuf, 10);
-            while ( !_wcschr(tmpBuf, L'\n') );
+            while ( !__wcschr(tmpBuf, L'\n') );
         }
         for ( p = buf; iswspace(*p); ++p )
             ;
