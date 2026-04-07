@@ -720,7 +720,7 @@ int sithCommand_CmdKick(stdDebugConsoleCmd *pCmd, const char *pArgStr)
     return 1;
 }
 
-int sithCommand_matlist_sort(const void *a, const void *b)
+static int sithCommand_matlist_sort(const void *a, const void *b)
 {
     return ((const int*)b)[2] - ((const int*)a)[2];
 }
@@ -774,8 +774,7 @@ int sithCommand_CmdMatList(stdDebugConsoleCmd *pCmd, const char *pArgStr)
     // Sort by total bytes descending
     _qsort(matInfo, pWorld->numMaterials, sizeof(int[4]), sithCommand_matlist_sort);
 
-    // Print from largest to smallest
-    for (int i = pWorld->numMaterials - 1; i >= 0; i--)
+    for (int i = 0; i < pWorld->numMaterials; i++)
     {
         if ( matInfo[i][2] != 0 )
         {

@@ -1934,8 +1934,8 @@ int sithCog_Thingidk(sithCog *cog, sithSurface *surface, int linkId, int mask)
         sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].surface = surface;
         sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].cog = cog;
         sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].linkid = linkId;
+        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].mask = mask;
         sithCog_numSurfaceLinks++;
-        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks - 1].mask = mask;
     }
     return 1;
 }
@@ -1951,8 +1951,8 @@ int sithCog_Sectoridk(sithCog *cog, sithSector *sector, int linkId, int mask)
         sithCog_aSectorLinks[sithCog_numSectorLinks].sector = sector;
         sithCog_aSectorLinks[sithCog_numSectorLinks].cog = cog;
         sithCog_aSectorLinks[sithCog_numSectorLinks].linkid = linkId;
+        sithCog_aSectorLinks[sithCog_numSectorLinks].mask = mask;
         sithCog_numSectorLinks++;
-        sithCog_aSectorLinks[sithCog_numSectorLinks - 1].mask = mask;
     }
     return 1;
 }

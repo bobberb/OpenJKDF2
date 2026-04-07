@@ -411,7 +411,7 @@ int stdBitmap_AppendToFile(stdFile_t fhand, stdBitmap *pBitmap)
             if ( written != (int)rowBytes )
             {
                 stdPrintf(std_pHS->errorPrint, ".\\General\\stdBitmap.c", 0x1D4,
-                          "Error: Unable to write %d bytes to file.", vbuf->format.texture_size_in_bytes);
+                          "Error: Unable to write %d bytes to file.", rowBytes);
                 return 0;
             }
             pixels += vbuf->format.width_in_bytes;

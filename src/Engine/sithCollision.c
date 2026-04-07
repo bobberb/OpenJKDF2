@@ -1363,17 +1363,15 @@ int sithCollision_sub_4E73F0(sithSector *sector, rdVector3 *startPos, rdVector3 
     sithCollision_SearchRadiusForThings(sector, NULL, startPos, &dir, dist, radius, 0x12A);
 
     sithCollisionSearchEntry *best = sithCollision_FindBestResult();
+    int result = 1;
     if ( best )
     {
         best->hasBeenEnumerated = 1;
-        sithCollision_searchNumResults[sithCollision_searchStackIdx] = 0;
-        sithCollision_stackIdk[sithCollision_searchStackIdx] = 0;
-        sithCollision_searchStackIdx--;
-        return 0; // collision found = path blocked
+        result = 0;
     }
 
     sithCollision_searchNumResults[sithCollision_searchStackIdx] = 0;
     sithCollision_stackIdk[sithCollision_searchStackIdx] = 0;
     sithCollision_searchStackIdx--;
-    return 1; // no collision = path clear
+    return result;
 }

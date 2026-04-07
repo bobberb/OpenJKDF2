@@ -151,7 +151,12 @@ int stdFileUtil_DirExists(const char *path)
 {
     _WIN32_FIND_DATAA findData;
     HANDLE h = FindFirstFileA(path, &findData);
-    return h != INVALID_HANDLE_VALUE;
+    if ( h != INVALID_HANDLE_VALUE )
+    {
+        FindClose(h);
+        return 1;
+    }
+    return 0;
 }
 
 void stdFileUtil_RmDir(const char *path)
