@@ -1020,6 +1020,14 @@ void do_hooks()
     hook_function(sithComm_ClearMsgTmpBuf_ADDR, sithComm_ClearMsgTmpBuf);
     hook_function(sithComm_cogMsg_Reset_ADDR, sithComm_cogMsg_Reset);
 
+    // sithMulti
+    hook_function(sithMulti_map_init_related_ADDR, sithMulti_map_init_related);
+    hook_function(sithMulti_sub_4CA3B0_ADDR, sithMulti_sub_4CA3B0);
+    hook_function(sithMulti_sub_4CA410_ADDR, sithMulti_sub_4CA410);
+    hook_function(sithMulti_sendmsgidk4_ADDR, sithMulti_sendmsgidk4);
+    hook_function(sithMulti_ProcessJoin_unused_ADDR, sithMulti_ProcessJoin_unused);
+    hook_function(sithMulti_Send36_ADDR, sithMulti_Send36);
+
     // sithCogVm
     hook_function(sithCogExec_Exec_ADDR, sithCogExec_Exec);
     hook_function(sithCogExec_ExecCog_ADDR, sithCogExec_ExecCog);
