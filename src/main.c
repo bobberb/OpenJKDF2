@@ -2278,6 +2278,9 @@ void do_hooks()
     hook_function(sithCollision_CollideHurt_ADDR, sithCollision_CollideHurt);
     hook_function(sithCollision_HasLos_ADDR, sithCollision_HasLos);
     hook_function(sithCollision_DebrisPlayerCollide_ADDR, sithCollision_DebrisPlayerCollide);
+    hook_function(sithCollision_sub_4E6FB0_ADDR, sithCollision_sub_4E6FB0);
+    hook_function(sithCollision_sub_4E7310_ADDR, sithCollision_sub_4E7310);
+    hook_function(sithCollision_sub_4E73F0_ADDR, sithCollision_sub_4E73F0);
 #endif
     
     // sithActor
