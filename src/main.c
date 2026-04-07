@@ -1318,7 +1318,9 @@ void do_hooks()
     hook_function(stdStrTable_Free_ADDR, stdStrTable_Free);
     hook_function(stdStrTable_GetUniString_ADDR, stdStrTable_GetUniString);
     hook_function(stdStrTable_GetStringWithFallback_ADDR, stdStrTable_GetStringWithFallback);
-    
+    hook_function(stdStrTable_ParseLine_ADDR, stdStrTable_ParseLine);
+    hook_function(stdStrTable_ParseUniLine_ADDR, stdStrTable_ParseUniLine);
+
     // stdPcx
     hook_function(stdPcx_Load_ADDR, stdPcx_Load);
     hook_function(stdPcx_Write_ADDR, stdPcx_Write);
@@ -1740,6 +1742,10 @@ void do_hooks()
     hook_function(sithMain_AutoSave_ADDR, sithMain_AutoSave);
     
     // sithAnimClass
+    hook_function(sithAnimClass_Load_ADDR, sithAnimClass_Load);
+    hook_function(sithAnimClass_LoadEntry_ADDR, sithAnimClass_LoadEntry);
+    hook_function(sithAnimClass_LoadPupEntry_ADDR, sithAnimClass_LoadPupEntry);
+    hook_function(sithAnimClass_New_ADDR, sithAnimClass_New);
     hook_function(sithAnimClass_Free_ADDR, sithAnimClass_Free);
     
     // sithCamera
@@ -1803,6 +1809,7 @@ void do_hooks()
     // sithSector
     hook_function(sithAIAwareness_Startup_ADDR, sithAIAwareness_Startup);
     hook_function(sithAIAwareness_Shutdown_ADDR, sithAIAwareness_Shutdown);
+    hook_function(sithAIAwareness_sub_4F2B10_ADDR, sithAIAwareness_sub_4F2B10);
     hook_function(sithPhysics_ApplyDrag_ADDR, sithPhysics_ApplyDrag);
     hook_function(sithPhysics_ThingPhysGeneral_ADDR, sithPhysics_ThingPhysGeneral);
     hook_function(sithPhysics_ThingPhysPlayer_ADDR, sithPhysics_ThingPhysPlayer);
@@ -1813,6 +1820,8 @@ void do_hooks()
     hook_function(sithPhysics_ThingApplyForce_ADDR, sithPhysics_ThingApplyForce);
     hook_function(sithRenderSky_TransformVertical_ADDR, sithRenderSky_TransformVertical);
     hook_function(sithAIAwareness_AddEntry_ADDR, sithAIAwareness_AddEntry);
+    hook_function(sithAIAwareness_Tick_ADDR, sithAIAwareness_Tick);
+    hook_function(sithAIAwareness_sub_4F2C30_ADDR, sithAIAwareness_sub_4F2C30);
     hook_function(sithPhysics_ThingGetInsertOffsetZ_ADDR, sithPhysics_ThingGetInsertOffsetZ);
     hook_function(sithSector_GetPtrFromIdx_ADDR, sithSector_GetPtrFromIdx);
 
@@ -2041,11 +2050,21 @@ void do_hooks()
     hook_function(sithTemplate_CreateEntry_ADDR, sithTemplate_CreateEntry);
     
     // sithTrackThing
+    hook_function(sithTrackThing_SkipToFrame_ADDR, sithTrackThing_SkipToFrame);
+    hook_function(sithTrackThing_MoveToFrame_ADDR, sithTrackThing_MoveToFrame);
     hook_function(sithTrackThing_RotatePivot_ADDR, sithTrackThing_RotatePivot);
     hook_function(sithTrackThing_Rotate_ADDR, sithTrackThing_Rotate);
-    hook_function(sithTrackThing_SkipToFrame_ADDR, sithTrackThing_SkipToFrame);
+    hook_function(sithTrackThing_Arrivedidk_ADDR, sithTrackThing_Arrivedidk);
+    hook_function(sithTrackThing_sub_4FACC0_ADDR, sithTrackThing_sub_4FACC0);
+    hook_function(sithTrackThing_PrepareForOrient_ADDR, sithTrackThing_PrepareForOrient);
+    hook_function(sithTrackThing_Tick_ADDR, sithTrackThing_Tick);
+    hook_function(sithTrackThing_LoadPathParams_ADDR, sithTrackThing_LoadPathParams);
+    hook_function(sithTrackThing_BlockedIdk_ADDR, sithTrackThing_BlockedIdk);
+    hook_function(sithTrackThing_StoppedMoving_ADDR, sithTrackThing_StoppedMoving);
+    hook_function(sithTrackThing_Stop_ADDR, sithTrackThing_Stop);
     hook_function(sithTrackThing_PathMovePause_ADDR, sithTrackThing_PathMovePause);
     hook_function(sithTrackThing_PathMoveResume_ADDR, sithTrackThing_PathMoveResume);
+    hook_function(sithTrackThing_idkpathmove_ADDR, sithTrackThing_idkpathmove);
     
     // jkPlayer
     hook_function(jkPlayer_LoadAutosave_ADDR, jkPlayer_LoadAutosave);
@@ -2120,11 +2139,18 @@ void do_hooks()
     hook_function(jkSmack_SmackPlay_ADDR, jkSmack_SmackPlay);
     
     // jkGame
-    hook_function(jkGame_Startup_ADDR, jkGame_Startup);
-    hook_function(jkGame_ParseSection_ADDR, jkGame_ParseSection);
+    hook_function(jkGame_SetDefaultSettings_ADDR, jkGame_SetDefaultSettings);
+    hook_function(jkGame_ForceRefresh_ADDR, jkGame_ForceRefresh);
     hook_function(jkGame_Update_ADDR, jkGame_Update);
+    hook_function(jkGame_cam_idk_maybe_ADDR, jkGame_PrecalcViewSizes);
     hook_function(jkGame_ScreensizeIncrease_ADDR, jkGame_ScreensizeIncrease);
     hook_function(jkGame_ScreensizeDecrease_ADDR, jkGame_ScreensizeDecrease);
+    hook_function(jkGame_Gamma_ADDR, jkGame_Gamma);
+    hook_function(jkGame_ddraw_idk_palettes_ADDR, jkGame_ddraw_idk_palettes);
+    hook_function(jkGame_nullsub_36_ADDR, jkGame_nullsub_36);
+    hook_function(jkGame_Startup_ADDR, jkGame_Startup);
+    hook_function(jkGame_Shutdown_ADDR, jkGame_Shutdown);
+    hook_function(jkGame_ParseSection_ADDR, jkGame_ParseSection);
     
     // jkGob
     hook_function(jkGob_Startup_ADDR, jkGob_Startup);
@@ -2673,6 +2699,25 @@ void do_hooks()
 
     // sithCommand
     hook_function(sithCommand_Startup_ADDR, sithCommand_Startup);
+    hook_function(sithCommand_CmdTick_ADDR, sithCommand_CmdTick);
+    hook_function(sithCommand_CmdSession_ADDR, sithCommand_CmdSession);
+    hook_function(sithCommand_CheatSetDebugFlags_ADDR, sithCommand_CheatSetDebugFlags);
+    hook_function(sithCommand_CmdCogTrace_ADDR, sithCommand_CmdCogTrace);
+    hook_function(sithCommand_CmdCogPause_ADDR, sithCommand_CmdCogPause);
+    hook_function(sithCommand_CmdCogList_ADDR, sithCommand_CmdCogList);
+    hook_function(sithCommand_CmdFly_ADDR, sithCommand_CmdFly);
+    hook_function(sithCommand_CmdMem_ADDR, sithCommand_CmdMem);
+    hook_function(sithCommand_CmdDynamicMem_ADDR, sithCommand_CmdDynamicMem);
+    hook_function(sithCommand_CmdMemDump_ADDR, sithCommand_CmdMemDump);
+    hook_function(sithCommand_CmdMatList_ADDR, sithCommand_CmdMatList);
+    hook_function(sithCommand_CmdCoords_ADDR, sithCommand_CmdCoords);
+    hook_function(sithCommand_CmdWarp_ADDR, sithCommand_CmdWarp);
+    hook_function(sithCommand_CmdActivate_ADDR, sithCommand_CmdActivate);
+    hook_function(sithCommand_CmdJump_ADDR, sithCommand_CmdJump);
+    hook_function(sithCommand_CmdPlayers_ADDR, sithCommand_CmdPlayers);
+    hook_function(sithCommand_CmdPing_ADDR, sithCommand_CmdPing);
+    hook_function(sithCommand_CmdKick_ADDR, sithCommand_CmdKick);
+    hook_function(sithCommand_matlist_sort_ADDR, sithCommand_matlist_sort);
 
     //hook_function(Darray_sub_520CB0_ADDR, Darray_sub_520CB0);
     // test saber time

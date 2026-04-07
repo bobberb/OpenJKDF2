@@ -13,6 +13,7 @@
 #include "Dss/sithMulti.h"
 #include "Win95/stdComm.h"
 #include "World/sithWorld.h"
+#include "World/sithMaterial.h"
 #include "Gameplay/sithPlayer.h"
 #include "World/sithTemplate.h"
 #include "Main/jkQuakeConsole.h"
@@ -716,6 +717,76 @@ int sithCommand_CmdKick(stdDebugConsoleCmd *pCmd, const char *pArgStr)
         }
         while ( v2 < jkPlayer_maxPlayers );
     }
+    return 1;
+}
+
+int sithCommand_matlist_sort(const void *a, const void *b)
+{
+    return ((const int*)b)[2] - ((const int*)a)[2];
+}
+
+int sithCommand_CmdMatList(stdDebugConsoleCmd *pCmd, const char *pArgStr)
+{
+    sithWorld *pWorld = sithWorld_pCurrentWorld;
+    if ( !pWorld )
+    {
+        sithConsole_Print("No world.");
+        return 0;
+    }
+
+    // Allocate array: [matIdx, numFaces, totalBytes, bytesPerFace] per material
+    int (*matInfo)[4] = (int(*)[4])pSithHS->alloc(pWorld->numMaterials * sizeof(int[4]));
+
+    // Initialize
+    for (int i = 0; i < pWorld->numMaterials; i++)
+    {
+        matInfo[i][0] = i;
+        matInfo[i][1] = 0;
+    }
+
+    // Count faces per material
+    for (int i = 0; i < pWorld->numSurfaces; i++)
+    {
+        rdMaterial *mat = pWorld->surfaces[i].surfaceInfo.face.material;
+        if ( mat )
+        {
+            int matIdx = (int)(mat - pWorld->materials);
+            matInfo[matIdx][1]++;
+        }
+    }
+
+    // Calculate memory per material
+    for (int i = 0; i < pWorld->numMaterials; i++)
+    {
+        if ( matInfo[i][1] == 0 )
+        {
+            matInfo[i][2] = 0;
+            matInfo[i][3] = 0;
+        }
+        else
+        {
+            uint32_t memSize = sithMaterial_GetMemorySize(&pWorld->materials[i]);
+            matInfo[i][3] = memSize;
+            matInfo[i][2] = memSize / matInfo[i][1];
+        }
+    }
+
+    // Sort by total bytes descending
+    _qsort(matInfo, pWorld->numMaterials, sizeof(int[4]), sithCommand_matlist_sort);
+
+    // Print from largest to smallest
+    for (int i = pWorld->numMaterials - 1; i >= 0; i--)
+    {
+        if ( matInfo[i][2] != 0 )
+        {
+            _sprintf(std_genBuffer, "%-16s  %d faces, %d bytes, %d bytes/face",
+                     pWorld->materials[matInfo[i][0]].mat_fpath,
+                     matInfo[i][1], matInfo[i][3], matInfo[i][2]);
+            sithConsole_Print(std_genBuffer);
+        }
+    }
+
+    pSithHS->free(matInfo);
     return 1;
 }
 

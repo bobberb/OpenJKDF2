@@ -256,6 +256,21 @@ void sithTrackThing_StoppedMoving(sithThing* pThing)
     sithTrackThing_Stop(pThing);
 }
 
+flex_t sithTrackThing_sub_4FACC0(sithThing *thing, rdVector3 *targetPos)
+{
+    flex_t dist;
+
+    rdVector_Sub3(&thing->trackParams.vel, targetPos, &thing->position);
+    dist = rdVector_Normalize3Acc(&thing->trackParams.vel);
+    if ( dist != 0.0 )
+    {
+        thing->field_250 = 0;
+        thing->trackParams.flags |= 1;
+        thing->trackParams.field_1C = dist / thing->trackParams.lerpSpeed;
+    }
+    return thing->trackParams.field_1C;
+}
+
 void sithTrackThing_PrepareForOrient(sithThing *thing, rdVector3 *pGoalFrameRot, flex_t a3)
 {
     rdVector3 out;
