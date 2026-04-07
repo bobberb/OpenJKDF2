@@ -21,6 +21,7 @@
 #include "Cog/sithCogFunctionSound.h"
 #include "Cog/y.tab.h"
 #include "General/stdBitmap.h"
+#include "General/stdBmp.h"
 #include "General/stdMath.h"
 #include "General/stdJSON.h"
 #include "Primitives/rdVector.h"
@@ -1340,6 +1341,11 @@ void do_hooks()
     // stdPcx
     hook_function(stdPcx_Load_ADDR, stdPcx_Load);
     hook_function(stdPcx_Write_ADDR, stdPcx_Write);
+
+    // stdBmp
+    hook_function(stdBmp_Load_ADDR, stdBmp_Load);
+    hook_function(stdBmp_LoadEntryFromFile_ADDR, stdBmp_LoadEntryFromFile);
+    hook_function(stdBmp_Write_ADDR, stdBmp_Write);
     
     // sithStrTable
     hook_function(sithStrTable_Startup_ADDR, sithStrTable_Startup);
