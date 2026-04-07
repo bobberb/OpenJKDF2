@@ -1213,15 +1213,26 @@ void do_hooks()
     hook_function(stdConffile_GetFileHandle_ADDR, stdConffile_GetFileHandle);
     
     // stdFont
+    hook_function(stdFont_New_ADDR, stdFont_New);
     hook_function(stdFont_Load_ADDR, stdFont_Load);
+    hook_function(stdFont_Write_ADDR, stdFont_Write);
+    hook_function(stdFont_Free_ADDR, stdFont_Free);
     hook_function(stdFont_Draw1_ADDR, stdFont_Draw1);
     hook_function(stdFont_Draw2_ADDR, stdFont_Draw2);
     hook_function(stdFont_Draw3_ADDR, stdFont_Draw3);
-    hook_function(stdFont_sub_4352C0_ADDR, stdFont_sub_4352C0);
-    hook_function(stdFont_sub_435810_ADDR, stdFont_sub_435810);
+    hook_function(stdFont_Draw4_ADDR, stdFont_Draw4);
     hook_function(stdFont_sub_434EC0_ADDR, stdFont_sub_434EC0);
-    hook_function(stdFont_Free_ADDR, stdFont_Free);
     hook_function(stdFont_DrawAscii_ADDR, stdFont_DrawAscii);
+    hook_function(stdFont_sub_435190_ADDR, stdFont_sub_435190);
+    hook_function(stdFont_sub_4352C0_ADDR, stdFont_sub_4352C0);
+    hook_function(stdFont_sub_435570_ADDR, stdFont_sub_435570);
+    hook_function(stdFont_sub_4355B0_ADDR, stdFont_sub_4355B0);
+    hook_function(stdFont_sub_4355F0_ADDR, stdFont_sub_4355F0);
+    hook_function(stdFont_sub_4356B0_ADDR, stdFont_sub_4356B0);
+    hook_function(stdFont_sub_4357C0_ADDR, stdFont_sub_4357C0);
+    hook_function(stdFont_sub_435810_ADDR, stdFont_sub_435810);
+    hook_function(stdFont_sub_4358D0_ADDR, stdFont_sub_4358D0);
+    hook_function(stdFont_sub_435950_ADDR, stdFont_sub_435950);
     
     // stdFnames
     hook_function(stdFnames_FindMedName_ADDR, stdFnames_FindMedName);
