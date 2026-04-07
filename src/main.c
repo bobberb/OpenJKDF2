@@ -1294,11 +1294,27 @@ void do_hooks()
     hook_function(stdLinklist_GetTail_ADDR, stdLinklist_GetTail);
 
     // stdPalEffects
+    hook_function(stdPalEffects_Open_ADDR, stdPalEffects_Open);
+    hook_function(stdPalEffects_Close_ADDR, stdPalEffects_Close);
+    hook_function(stdPalEffects_NewRequest_ADDR, stdPalEffects_NewRequest);
     hook_function(stdPalEffects_FreeRequest_ADDR, stdPalEffects_FreeRequest);
+    hook_function(stdPalEffects_GetEffectPointer_ADDR, stdPalEffects_GetEffectPointer);
+    hook_function(stdPalEffects_FlushAllEffects_ADDR, stdPalEffects_FlushAllEffects);
+    hook_function(stdPalEffects_SetPaletteFunc_ADDR, stdPalEffects_SetPaletteFunc);
+    hook_function(stdPalEffects_RefreshPalette_ADDR, stdPalEffects_RefreshPalette);
+    hook_function(stdPalEffects_ResetEffectsState_ADDR, stdPalEffects_ResetEffectsState);
+    hook_function(stdPalEffects_ResetEffect_ADDR, stdPalEffects_ResetEffect);
+    hook_function(stdPalEffects_UpdatePalette_ADDR, stdPalEffects_UpdatePalette);
+    hook_function(stdPalEffects_GatherEffects_ADDR, stdPalEffects_GatherEffects);
+    hook_function(stdPalEffects_SetUnk_ADDR, stdPalEffects_SetStateBools);
     hook_function(stdPalEffects_SetFilter_ADDR, stdPalEffects_SetFilter);
     hook_function(stdPalEffects_SetTint_ADDR, stdPalEffects_SetTint);
     hook_function(stdPalEffects_SetAdd_ADDR, stdPalEffects_SetAdd);
     hook_function(stdPalEffects_SetFade_ADDR, stdPalEffects_SetFade);
+    hook_function(stdPalEffects_ApplyFilter_ADDR, stdPalEffects_ApplyFilter);
+    hook_function(stdPalEffects_ApplyTint_ADDR, stdPalEffects_ApplyTint);
+    hook_function(stdPalEffects_ApplyAdd_ADDR, stdPalEffects_ApplyAdd);
+    hook_function(stdPalEffects_ApplyFade_ADDR, stdPalEffects_ApplyFade);
     
     // stdString
     hook_function(stdString_FastCopy_ADDR, stdString_FastCopy);
