@@ -1199,9 +1199,17 @@ void do_hooks()
     hook_function(stdFPutc_ADDR, stdFPutc);
     
     // stdColor
-    hook_function(stdColor_Indexed8ToRGB16_ADDR, stdColor_Indexed8ToRGB16);
-    hook_function(stdColor_ColorConvertOnePixel_ADDR, stdColor_ColorConvertOnePixel);
+    hook_function(stdColor_LoadPalette_ADDR, stdColor_LoadPalette);
+    hook_function(stdColor_GammaCorrect_ADDR, stdColor_GammaCorrect);
+    hook_function(stdColor_FindClosest_ADDR, stdColor_FindClosest);
+    hook_function(stdColor_RGBtoHSV_ADDR, stdColor_RGBtoHSV);
+    hook_function(stdColor_HSVtoRGB_ADDR, stdColor_HSVtoRGB);
+    hook_function(stdColor_BuildRGB16LUT_ADDR, stdColor_BuildRGB16LUT);
+    hook_function(stdColor_BuildRGBAKEY16LUT_ADDR, stdColor_BuildRGBAKEY16LUT);
+    hook_function(stdColor_BuildRGBA16LUT_ADDR, stdColor_BuildRGBA16LUT);
     hook_function(stdColor_ColorConvertOneRow_ADDR, stdColor_ColorConvertOneRow);
+    hook_function(stdColor_ColorConvertOnePixel_ADDR, stdColor_ColorConvertOnePixel);
+    hook_function(stdColor_Indexed8ToRGB16_ADDR, stdColor_Indexed8ToRGB16);
     
     // stdConffile
     hook_function(stdConffile_OpenRead_ADDR, stdConffile_OpenRead);
