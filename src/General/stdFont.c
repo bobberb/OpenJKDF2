@@ -1,5 +1,6 @@
 #include "stdFont.h"
 
+#include <wctype.h>
 #include "stdPlatform.h"
 #include "General/stdBitmap.h"
 #include "General/stdString.h"

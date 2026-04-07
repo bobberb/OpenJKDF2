@@ -1489,14 +1489,9 @@ int sithMulti_map_init_related()
     sithNet_teamScore[3] = 0;
     sithNet_teamScore[4] = 0;
 
-    sithPlayer_sub_4C87C0(0, sithNet_dword_8321EC);
+    sithPlayer_sub_4C87C0(0, stdComm_dplayIdSelf);
     sithPlayer_idk(0);
     sithPlayer_ResetPalEffects();
-
-    if ( (sithNet_MultiModeFlags & 0x100) != 0 )
-    {
-        sithNet_dword_8C603C = 1;
-    }
 
     stdComm_DoReceive();
     return 1;
@@ -1563,12 +1558,12 @@ void sithMulti_sendmsgidk4(int playerIdx)
         }
     }
 
-    sithSoundClass_StopSound(jkPlayer_playerInfos[playerIdx].actorThing, 0);
+    sithSoundClass_StopSound(jkPlayer_playerInfos[playerIdx].playerThing, 0);
     sithPlayer_Startup(playerIdx);
 
     if ( sithNet_isServer )
     {
-        sithCog_SendSimpleMessageToAll(SITH_MESSAGE_JOIN, 3, jkPlayer_playerInfos[playerIdx].actorThing->thing_id, 0, playerIdx);
+        sithCog_SendSimpleMessageToAll(SITH_MESSAGE_JOIN, 3, jkPlayer_playerInfos[playerIdx].playerThing->thing_id, 0, playerIdx);
     }
 }
 
@@ -1583,15 +1578,15 @@ void sithMulti_ProcessJoin_unused(int playerIdx)
 
     if ( sithNet_isServer )
     {
-        sithCog_SendSimpleMessageToAll(SITH_MESSAGE_JOIN, 3, jkPlayer_playerInfos[playerIdx].actorThing->thing_id, 0, playerIdx);
+        sithCog_SendSimpleMessageToAll(SITH_MESSAGE_JOIN, 3, jkPlayer_playerInfos[playerIdx].playerThing->thing_id, 0, playerIdx);
     }
 
-    if ( sithMulti_handlerCallback )
+    if ( sithMulti_handlerIdk )
     {
-        sithMulti_handlerCallback();
+        sithMulti_handlerIdk();
     }
 
-    sithDSSThing_SendSyncThing(sithWorld_pCurrentWorld, -1, 0xFF);
+    sithDSSThing_SendSyncThing(sithPlayer_pLocalPlayerThing, -1, 0xFF);
 }
 
 void sithMulti_Send36(int param1, int param2, int sendtoId)

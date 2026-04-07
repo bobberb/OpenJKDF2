@@ -371,7 +371,7 @@ int stdBitmap_AppendToFile(stdFile_t fhand, stdBitmap *pBitmap)
 
     _memset(&header, 0, sizeof(header));
     _strncpy((char*)&header.magic, "BM  ", 4);
-    header.version = 0x46;
+    header.field_4 = 0x46;
     header.field_8 = pBitmap->field_20;
     header.palFmt = pBitmap->palFmt;
     header.numMips = pBitmap->numMips;

@@ -20,10 +20,6 @@
 #include "General/stdJSON.h"
 #include "jk.h"
 
-#define sithCommand_CmdMatList ((void*)sithCommand_CmdMatList_ADDR)
-
-#define sithCommand_matlist_sort ((void*)sithCommand_matlist_sort_ADDR)
-
 typedef struct sithCommandBind sithCommandBind;
 typedef struct sithCommandBind
 {
@@ -720,7 +716,7 @@ int sithCommand_CmdKick(stdDebugConsoleCmd *pCmd, const char *pArgStr)
     return 1;
 }
 
-static int sithCommand_matlist_sort(const void *a, const void *b)
+int sithCommand_matlist_sort(const void *a, const void *b)
 {
     return ((const int*)b)[2] - ((const int*)a)[2];
 }
