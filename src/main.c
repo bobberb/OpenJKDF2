@@ -1028,6 +1028,15 @@ void do_hooks()
     hook_function(sithMulti_ProcessJoin_unused_ADDR, sithMulti_ProcessJoin_unused);
     hook_function(sithMulti_Send36_ADDR, sithMulti_Send36);
 
+    // sithCog
+    hook_function(sithCog_FreeEntry_ADDR, sithCog_FreeEntry);
+    hook_function(sithCog_Free2_ADDR, sithCog_Free2);
+    hook_function(sithCog_InitScripts_ADDR, sithCog_InitScripts);
+    hook_function(sithCog_InitCogs_ADDR, sithCog_InitCogs);
+    hook_function(sithCog_ThingFromSymbolidk_ADDR, sithCog_ThingFromSymbolidk);
+    hook_function(sithCog_Thingidk_ADDR, sithCog_Thingidk);
+    hook_function(sithCog_Sectoridk_ADDR, sithCog_Sectoridk);
+
     // sithCogVm
     hook_function(sithCogExec_Exec_ADDR, sithCogExec_Exec);
     hook_function(sithCogExec_ExecCog_ADDR, sithCogExec_ExecCog);

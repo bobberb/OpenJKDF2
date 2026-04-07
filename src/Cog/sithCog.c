@@ -1844,3 +1844,115 @@ sithCog* sithCog_GetByIdx(int32_t idx)
 
     return result;
 }
+
+void sithCog_FreeEntry(sithCog *cog)
+{
+    sithCogParse_FreeSymboltable(cog->pSymbolTable);
+    for (uint32_t i = 0; i < cog->cogscript->numIdk; i++)
+    {
+        if ( cog->cogscript->aIdk[i].desc )
+        {
+            pSithHS->free(cog->cogscript->aIdk[i].desc);
+            cog->cogscript->aIdk[i].desc = NULL;
+        }
+    }
+    if ( cog->heap )
+    {
+        pSithHS->free(cog->heap);
+        cog->heap = NULL;
+    }
+}
+
+void sithCog_Free2(sithCogScript *cogscript)
+{
+    sithCogParse_FreeSymboltable(cogscript->pSymbolTable);
+    if ( cogscript->script_program )
+    {
+        pSithHS->free(cogscript->script_program);
+        cogscript->script_program = NULL;
+    }
+}
+
+int sithCog_InitScripts(sithWorld *world, int num)
+{
+    sithCogScript *scripts = (sithCogScript *)pSithHS->alloc(num * sizeof(sithCogScript));
+    world->cogScripts = scripts;
+    if ( !scripts )
+    {
+        stdPrintf(pSithHS->errorPrint, ".\\Cog\\sithCog.c", 0x34B,
+                  "Memory alloc failure initializing cog scripts.");
+        return 0;
+    }
+    _memset(scripts, 0, num * sizeof(sithCogScript));
+    world->numCogScripts = num;
+    world->numCogScriptsLoaded = 0;
+    return 1;
+}
+
+int sithCog_InitCogs(sithWorld *world, int num)
+{
+    sithCog *cogs = (sithCog *)pSithHS->alloc(num * sizeof(sithCog));
+    world->cogs = cogs;
+    if ( !cogs )
+    {
+        stdPrintf(pSithHS->errorPrint, ".\\Cog\\sithCog.c", 0x373,
+                  "Memory alloc failure initializing cogs.");
+        return 0;
+    }
+    _memset(cogs, 0, num * sizeof(sithCog));
+    world->numCogs = num;
+    world->numCogsLoaded = 0;
+    return 1;
+}
+
+int sithCog_ThingFromSymbolidk(sithCog *cog, sithThing *thing, int linkId, int mask)
+{
+    int thingIdx = sithThing_GetIdxFromThing(thing);
+    if ( !thingIdx || !thing->thing_id )
+        return 0;
+    if ( linkId >= 0 )
+    {
+        thing->thingflags |= 0x400;
+        sithCog_aThingLinks[sithCog_numThingLinks].thing = thing;
+        sithCog_aThingLinks[sithCog_numThingLinks].cog = cog;
+        sithCog_aThingLinks[sithCog_numThingLinks].linkid = linkId;
+        sithCog_aThingLinks[sithCog_numThingLinks].mask = mask;
+        sithCog_aThingLinks[sithCog_numThingLinks].signature = thing->thing_id;
+        sithCog_numThingLinks++;
+    }
+    return 1;
+}
+
+int sithCog_Thingidk(sithCog *cog, sithSurface *surface, int linkId, int mask)
+{
+    int surfIdx = sithSurface_GetIdxFromPtr(surface);
+    if ( !surfIdx )
+        return 0;
+    if ( linkId >= 0 )
+    {
+        surface->surfaceFlags |= 2;
+        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].surface = surface;
+        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].cog = cog;
+        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks].linkid = linkId;
+        sithCog_numSurfaceLinks++;
+        sithCog_aSurfaceLinks[sithCog_numSurfaceLinks - 1].mask = mask;
+    }
+    return 1;
+}
+
+int sithCog_Sectoridk(sithCog *cog, sithSector *sector, int linkId, int mask)
+{
+    int sectorIdx = sithSector_GetIdxFromPtr(sector);
+    if ( !sectorIdx )
+        return 0;
+    if ( linkId >= 0 )
+    {
+        sector->flags |= 4;
+        sithCog_aSectorLinks[sithCog_numSectorLinks].sector = sector;
+        sithCog_aSectorLinks[sithCog_numSectorLinks].cog = cog;
+        sithCog_aSectorLinks[sithCog_numSectorLinks].linkid = linkId;
+        sithCog_numSectorLinks++;
+        sithCog_aSectorLinks[sithCog_numSectorLinks - 1].mask = mask;
+    }
+    return 1;
+}
