@@ -1241,9 +1241,15 @@ void do_hooks()
     
     // stdFileUtil
     hook_function(stdFileUtil_NewFind_ADDR, stdFileUtil_NewFind);
-    hook_function(stdFileUtil_FindNext_ADDR, stdFileUtil_FindNext);
     hook_function(stdFileUtil_DisposeFind_ADDR, stdFileUtil_DisposeFind);
+    hook_function(stdFileUtil_FindReset_ADDR, stdFileUtil_FindReset);
+    hook_function(stdFileUtil_FindNext_ADDR, stdFileUtil_FindNext);
+    hook_function(stdFileUtil_FindQuick_ADDR, stdFileUtil_FindQuick);
+    hook_function(stdFileUtil_CountMatches_ADDR, stdFileUtil_CountMatches);
     hook_function(stdFileUtil_MkDir_ADDR, stdFileUtil_MkDir);
+    hook_function(stdFileUtil_DirExists_ADDR, stdFileUtil_DirExists);
+    hook_function(stdFileUtil_RmDir_ADDR, stdFileUtil_RmDir);
+    hook_function(stdFileUtil_DelFile_ADDR, stdFileUtil_DelFile);
     
     // stdGob
     hook_function(stdGob_Startup_ADDR, stdGob_Startup);
