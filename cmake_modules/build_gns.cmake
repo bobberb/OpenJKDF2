@@ -33,7 +33,7 @@ ExternalProject_Add(
     INSTALL_DIR            ${GameNetworkingSockets_ROOT}
     UPDATE_DISCONNECTED    TRUE
     CMAKE_ARGS             "--toolchain ${CMAKE_TOOLCHAIN_FILE}"
-                           "--install-prefix ${GameNetworkingSockets_ROOT}"
+                           "--install-prefix ${GameNetworkingSockets_ROOT}" -DCMAKE_INSTALL_LIBDIR=lib
                            -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
     CMAKE_CACHE_ARGS       -DCMAKE_BUILD_TYPE:STRING=Release
                            -DCMAKE_POLICY_DEFAULT_CMP0074:STRING=NEW

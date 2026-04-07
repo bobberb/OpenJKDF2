@@ -61,6 +61,8 @@
 
           cmakeFlags = [
             "-DPLAT_LINUX_64=TRUE"
+            # GNS patch is version-pinned and may fail on submodule updates
+            "-DTARGET_USE_GAMENETWORKINGSOCKETS=FALSE"
           ];
 
           # Build protobuf first (vendored), then the main target
@@ -110,6 +112,8 @@
             export OPENJKDF2_RELEASE_COMMIT_SHORT="$(git rev-parse --short=8 HEAD 2>/dev/null || echo dev)"
             export CC=clang
             export CXX=clang++
+            # Vendored protoc needs zlib at runtime
+            export LD_LIBRARY_PATH="${pkgs.zlib}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
             echo "OpenJKDF2 dev shell ready"
             echo "  Build: mkdir -p build && cd build && cmake .. && make -j\$(nproc) PROTOBUF && make -j\$(nproc) openjkdf2"
           '';

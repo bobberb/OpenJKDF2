@@ -113,7 +113,7 @@ ExternalProject_Add(
     INSTALL_DIR            ${Protobuf_ROOT}
     UPDATE_DISCONNECTED    TRUE
     CMAKE_ARGS             --toolchain ${CMAKE_TOOLCHAIN_FILE}
-                           --install-prefix ${Protobuf_ROOT}
+                           --install-prefix ${Protobuf_ROOT} -DCMAKE_INSTALL_LIBDIR=lib
                            -DCMAKE_BUILD_TYPE:STRING=Release
                            -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                            ${PROTOBUF_EXTRA_FLAGS}

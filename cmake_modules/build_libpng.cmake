@@ -25,7 +25,7 @@ ExternalProject_Add(
     INSTALL_DIR         ${PNG_ROOT}
     UPDATE_DISCONNECTED TRUE
     CMAKE_ARGS          --toolchain ${CMAKE_TOOLCHAIN_FILE}
-                        --install-prefix ${PNG_ROOT}
+                        --install-prefix ${PNG_ROOT} -DCMAKE_INSTALL_LIBDIR=lib
                         -DCMAKE_BUILD_TYPE:STRING=Release
                         -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                         -DCMAKE_POLICY_DEFAULT_CMP0074:STRING=NEW
