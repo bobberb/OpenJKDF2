@@ -620,6 +620,56 @@ uint32_t stdPlatform_GetTimeMsec()
 static int Dummy_suggestHeap(int which) { return HEAP_ANY; }
 #endif
 
+#ifndef PLATFORM_POSIX
+void stdPlatform_Assert(const char *msg, const char *file, int line)
+{
+    char buf[512];
+    int lastSlash = 0;
+    for (int i = 0; file[i]; i++)
+    {
+        if ( file[i] == '\\' )
+            lastSlash = i;
+    }
+    _sprintf(buf, "%s\n(%s, %d)\n", msg, &file[lastSlash ? lastSlash + 1 : 0], line);
+    jk_printf("ASSERT: %s", buf);
+}
+
+void* stdPlatform_AllocHandle(uint32_t size)
+{
+    return _malloc(size);
+}
+
+void stdPlatform_FreeHandle(void *ptr)
+{
+    _free(ptr);
+}
+
+void* stdPlatform_ReallocHandle(void *ptr, uint32_t size)
+{
+    return _realloc(ptr, size);
+}
+
+void* stdPlatform_LockHandle(void *ptr)
+{
+    return ptr;
+}
+
+void stdPlatform_UnlockHandle(void *ptr)
+{
+}
+
+void stdPlatform_GetDateTime(char *out, uint32_t outLen)
+{
+    SYSTEMTIME st;
+    char tmp[80];
+    GetLocalTime(&st);
+    const char *ampm = (st.wHour >= 13) ? "pm" : "am";
+    uint16_t hour12 = (st.wHour >= 13) ? st.wHour - 12 : st.wHour;
+    _sprintf(tmp, "%d/%d/%02d %d:%02d %s", st.wMonth, st.wDay, st.wYear, hour12, st.wMinute, ampm);
+    _strncpy(out, tmp, outLen);
+}
+#endif // !PLATFORM_POSIX
+
 void stdPlatform_InitServices(HostServices *handlers)
 {
     handlers->statusPrint = stdPlatform_Printf;

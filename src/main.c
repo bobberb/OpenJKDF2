@@ -901,8 +901,15 @@ void do_hooks()
 #endif // LINUX
     
     // stdPlatform
-    hook_function(stdPlatform_InitServices_ADDR, stdPlatform_InitServices);
     hook_function(stdPlatform_Startup_ADDR, stdPlatform_Startup);
+    hook_function(stdPlatform_Assert_ADDR, stdPlatform_Assert);
+    hook_function(stdPlatform_AllocHandle_ADDR, stdPlatform_AllocHandle);
+    hook_function(stdPlatform_FreeHandle_ADDR, stdPlatform_FreeHandle);
+    hook_function(stdPlatform_ReallocHandle_ADDR, stdPlatform_ReallocHandle);
+    hook_function(stdPlatform_LockHandle_ADDR, stdPlatform_LockHandle);
+    hook_function(stdPlatform_UnlockHandle_ADDR, stdPlatform_UnlockHandle);
+    hook_function(stdPlatform_InitServices_ADDR, stdPlatform_InitServices);
+    hook_function(stdPlatform_GetDateTime_ADDR, stdPlatform_GetDateTime);
     
     // jkMain
     hook_function(jkMain_GuiAdvance_ADDR, jkMain_GuiAdvance);
