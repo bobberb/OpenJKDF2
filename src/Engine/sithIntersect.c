@@ -736,3 +736,18 @@ int sithIntersect_sub_5090B0(const rdVector3 *pStartPos, const rdVector3 *pRayDi
     }
     return 0;
 }
+
+int sithIntersect_sub_508070(rdVector3 *a1, flex_t a2, rdFace *a3, rdVector3 *a4, rdVector3 *pProjectedOut)
+{
+    int side = 0;
+    int result = sithIntersect_sub_508750(a1, a2, a3, a4, &side);
+    if ( !result )
+        return 0;
+    if ( side == 0 )
+        return 4;
+    return sithIntersect_sub_508990(a1, a2, a3, a4, side, pProjectedOut);
+}
+
+// sub_507EA0 and sub_508370 need struct offset verification before implementation.
+// Both iterate mesh faces/geosets calling SphereHit/sub_508400.
+// Ghidra decompilation available but struct layout depends on conditional compilation.

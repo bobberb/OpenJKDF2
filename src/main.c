@@ -1988,6 +1988,7 @@ void do_hooks()
     hook_function(sithIntersect_sub_5090B0_ADDR, sithIntersect_sub_5090B0);
     hook_function(sithIntersect_sub_508400_ADDR, sithIntersect_sub_508400);
     hook_function(sithIntersect_sub_508990_ADDR, sithIntersect_sub_508990);
+    hook_function(sithIntersect_sub_508070_ADDR, sithIntersect_sub_508070);
 #endif
 
     // sithTime

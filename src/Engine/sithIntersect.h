@@ -20,6 +20,7 @@
 MATH_FUNC int sithIntersect_IsSphereInSectorBox(const rdVector3 *pos, flex_t radius, sithSector *sector);
 
 // sithIntersect_sub_507EA0
+int sithIntersect_sub_508070(rdVector3 *a1, flex_t a2, rdFace *a3, rdVector3 *a4, rdVector3 *pProjectedOut);
 MATH_FUNC int sithIntersect_IsSphereInSector(const rdVector3 *pos, flex_t radius, sithSector *sector);
 // sithIntersect_sub_508070
 MATH_FUNC int sithIntersect_CollideThings(sithThing* thing, const rdVector3* a2, const rdVector3* a3, flex_t a4, flex_t a5, sithThing* a6, int raycastFlags, flex_t* a8, rdMesh** outMesh, rdFace** a10, rdVector3* a11);
