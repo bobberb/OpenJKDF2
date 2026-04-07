@@ -1047,8 +1047,14 @@ void do_hooks()
     hook_function(stdBitmap_LoadFromFile_ADDR, stdBitmap_LoadFromFile);
     hook_function(stdBitmap_LoadEntry_ADDR, stdBitmap_LoadEntry);
     //hook_function(stdBitmap_LoadEntryFromFile_ADDR, stdBitmap_LoadEntryFromFile);
-    hook_function(stdBitmap_ConvertColorFormat_ADDR, stdBitmap_ConvertColorFormat);
     hook_function(stdBitmap_Free_ADDR, stdBitmap_Free);
+    hook_function(stdBitmap_FreeEntry_ADDR, stdBitmap_FreeEntry);
+    hook_function(stdBitmap_AppendToFile_ADDR, stdBitmap_AppendToFile);
+    hook_function(stdBitmap_Write_ADDR, stdBitmap_Write);
+    hook_function(stdBitmap_ConvertColorFormat_ADDR, stdBitmap_ConvertColorFormat);
+    hook_function(stdBitmap_New_ADDR, stdBitmap_New);
+    hook_function(stdBitmap_NewEntry_ADDR, stdBitmap_NewEntry);
+    hook_function(stdBitmap_MemUsage_ADDR, stdBitmap_MemUsage);
     
     // stdMath
     hook_function(stdMath_FlexPower_ADDR, stdMath_FlexPower);
