@@ -22,6 +22,7 @@
 #include "Cog/y.tab.h"
 #include "General/stdBitmap.h"
 #include "General/stdBmp.h"
+#include "General/stdLbm.h"
 #include "General/stdMath.h"
 #include "General/stdJSON.h"
 #include "Primitives/rdVector.h"
@@ -1401,7 +1402,10 @@ void do_hooks()
     hook_function(stdBmp_Load_ADDR, stdBmp_Load);
     hook_function(stdBmp_LoadEntryFromFile_ADDR, stdBmp_LoadEntryFromFile);
     hook_function(stdBmp_Write_ADDR, stdBmp_Write);
-    
+
+    // stdLbm
+    hook_function(stdLbm_Compress_ADDR, stdLbm_Compress);
+
     // sithStrTable
     hook_function(sithStrTable_Startup_ADDR, sithStrTable_Startup);
     hook_function(sithStrTable_Shutdown_ADDR, sithStrTable_Shutdown);
