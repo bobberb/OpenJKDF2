@@ -102,6 +102,24 @@ void sithPlayer_NewEntry(sithWorld *world)
     }
 }
 
+int sithPlayer_GetBinItemActive(int binIdx)
+{
+    return (jkPlayer_playerInfos[playerThingIdx].iteminfo[binIdx].state & 4) >> 2;
+}
+
+int sithPlayer_GetBinItemAvailable(int binIdx)
+{
+    return (jkPlayer_playerInfos[playerThingIdx].iteminfo[binIdx].state & 8) >> 3;
+}
+
+void sithPlayer_SetBinItemActive(int binIdx, int active)
+{
+    if ( active )
+        jkPlayer_playerInfos[playerThingIdx].iteminfo[binIdx].state |= 4;
+    else
+        jkPlayer_playerInfos[playerThingIdx].iteminfo[binIdx].state &= ~4;
+}
+
 flex_t sithPlayer_GetBinAmt(int idx)
 {
     //if (idx)
