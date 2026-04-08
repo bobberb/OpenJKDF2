@@ -22,6 +22,7 @@
 #include "Cog/y.tab.h"
 #include "General/stdBitmap.h"
 #include "General/stdBmp.h"
+#include "General/util.h"
 #include "General/stdLbm.h"
 #include "General/stdMath.h"
 #include "General/stdJSON.h"
@@ -1406,6 +1407,13 @@ void do_hooks()
 
     // stdLbm
     hook_function(stdLbm_Compress_ADDR, stdLbm_Compress);
+
+    // util
+    hook_function(util_FileExists_ADDR, util_FileExists);
+    hook_function(util_unkcomparison1_ADDR, util_RectsOverlap);
+    hook_function(util_unkcomparison2_ADDR, util_RectsOverlapExclusive);
+    hook_function(util_unkcomparison3_ADDR, util_RectUnion);
+    hook_function(util_Weirdchecksum_ADDR, util_Weirdchecksum);
 
     // sithStrTable
     hook_function(sithStrTable_Startup_ADDR, sithStrTable_Startup);
