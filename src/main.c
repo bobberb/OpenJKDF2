@@ -1900,7 +1900,10 @@ void do_hooks()
     hook_function(sithPhysics_ThingPhysGeneral_ADDR, sithPhysics_ThingPhysGeneral);
     hook_function(sithPhysics_ThingPhysPlayer_ADDR, sithPhysics_ThingPhysPlayer);
     hook_function(sithRenderSky_Update_ADDR, sithRenderSky_Update);
+    hook_function(sithSector_New_ADDR, sithSector_New);
+    hook_function(sithSector_NewEntry_ADDR, sithSector_NewEntry);
     hook_function(sithSector_Free_ADDR, sithSector_Free);
+    hook_function(sithPlayer_Open_ADDR, sithPlayer_Open);
     hook_function(sithRenderSky_TransformHorizontal_ADDR, sithRenderSky_TransformHorizontal);
     hook_function(sithPhysics_ThingSetLook_ADDR, sithPhysics_ThingSetLook);
     hook_function(sithPhysics_ThingApplyForce_ADDR, sithPhysics_ThingApplyForce);

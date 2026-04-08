@@ -45,6 +45,10 @@ void sithPlayer_Startup(int idx)
     }
 }
 
+void sithPlayer_Open()
+{
+}
+
 void sithPlayer_Close()
 {
     if ( sithPlayer_pLocalPlayer )

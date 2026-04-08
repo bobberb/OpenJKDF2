@@ -36,6 +36,7 @@
 extern int sithPlayer_bNoClippingRend;
 
 void sithPlayer_Startup(int idx);
+void sithPlayer_Open();
 void sithPlayer_Close();
 void sithPlayer_NewEntry(sithWorld *world);
 flex_t sithPlayer_GetBinAmt(int idx);
