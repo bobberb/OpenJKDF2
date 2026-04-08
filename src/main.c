@@ -1851,7 +1851,8 @@ void do_hooks()
     hook_function(sithControl_Tick_ADDR, sithControl_Tick);
     hook_function(sithControl_AddInputHandler_ADDR, sithControl_AddInputHandler);
     hook_function(sithControl_HandlePlayer_ADDR, sithControl_HandlePlayer);
-    
+    hook_function(sithControl_sub_4D6910_ADDR, sithControl_sub_4D6910);
+
     // sithPlayerActions
     hook_function(sithPlayerActions_Activate_ADDR, sithPlayerActions_Activate);
     hook_function(sithPlayerActions_JumpWithVel_ADDR, sithPlayerActions_JumpWithVel);
