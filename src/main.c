@@ -1218,6 +1218,7 @@ void do_hooks()
     hook_function(stdStartup_ADDR, stdStartup);
     hook_function(stdShutdown_ADDR, stdShutdown);
     hook_function(stdInitServices_ADDR, stdInitServices);
+    hook_function(stdGetReturnString_ADDR, stdGetReturnString);
     hook_function(stdCalcBitPos_ADDR, stdCalcBitPos);
     hook_function(stdReadRaw_ADDR, stdReadRaw);
     hook_function(stdFGetc_ADDR, stdFGetc);
@@ -1852,6 +1853,7 @@ void do_hooks()
     hook_function(sithControl_AddInputHandler_ADDR, sithControl_AddInputHandler);
     hook_function(sithControl_HandlePlayer_ADDR, sithControl_HandlePlayer);
     hook_function(sithControl_SetFuncType_ADDR, sithControl_SetFuncType);
+    hook_function(sithControl_sub_4D7C30_ADDR, sithControl_ClearAllBindings);
 
     // sithPlayerActions
     hook_function(sithPlayerActions_Activate_ADDR, sithPlayerActions_Activate);

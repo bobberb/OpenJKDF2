@@ -44,6 +44,7 @@ int sithControl_IsOpen();
 int sithControl_Open();
 void sithControl_Close();
 void sithControl_SetFuncType(int funcIdx, uint32_t flags);
+void sithControl_ClearAllBindings();
 void sithControl_InitFuncToControlType();
 void sithControl_Tick(flex_t deltaSecs, int deltaMs);
 void sithControl_AddInputHandler(sithControl_handler_t a1);
