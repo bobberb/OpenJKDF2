@@ -198,7 +198,7 @@ void sithControl_Close()
     }
 }
 
-void sithControl_sub_4D6910(int funcIdx, uint32_t flags)
+void sithControl_SetFuncType(int funcIdx, uint32_t flags)
 {
     sithControl_inputFuncToControlType[funcIdx] = flags | 3;
 }
