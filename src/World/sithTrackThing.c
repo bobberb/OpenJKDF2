@@ -256,7 +256,7 @@ void sithTrackThing_StoppedMoving(sithThing* pThing)
     sithTrackThing_Stop(pThing);
 }
 
-flex_t sithTrackThing_sub_4FACC0(sithThing *thing, rdVector3 *targetPos)
+flex_t sithTrackThing_CalcMoveDirection(sithThing *thing, rdVector3 *targetPos)
 {
     flex_t dist;
 

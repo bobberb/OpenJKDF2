@@ -22,6 +22,8 @@
 #include "Cog/y.tab.h"
 #include "General/stdBitmap.h"
 #include "General/stdBmp.h"
+#include "General/util.h"
+#include "General/stdLbm.h"
 #include "General/stdMath.h"
 #include "General/stdJSON.h"
 #include "Primitives/rdVector.h"
@@ -1022,8 +1024,8 @@ void do_hooks()
 
     // sithMulti
     hook_function(sithMulti_map_init_related_ADDR, sithMulti_map_init_related);
-    hook_function(sithMulti_sub_4CA3B0_ADDR, sithMulti_sub_4CA3B0);
-    hook_function(sithMulti_sub_4CA410_ADDR, sithMulti_sub_4CA410);
+    hook_function(sithMulti_sub_4CA3B0_ADDR, sithMulti_ResetNetState);
+    hook_function(sithMulti_sub_4CA410_ADDR, sithMulti_CleanupThings);
     hook_function(sithMulti_sendmsgidk4_ADDR, sithMulti_sendmsgidk4);
     hook_function(sithMulti_ProcessJoin_unused_ADDR, sithMulti_ProcessJoin_unused);
     hook_function(sithMulti_Send36_ADDR, sithMulti_Send36);
@@ -1217,6 +1219,7 @@ void do_hooks()
     hook_function(stdStartup_ADDR, stdStartup);
     hook_function(stdShutdown_ADDR, stdShutdown);
     hook_function(stdInitServices_ADDR, stdInitServices);
+    hook_function(stdGetReturnString_ADDR, stdGetReturnString);
     hook_function(stdCalcBitPos_ADDR, stdCalcBitPos);
     hook_function(stdReadRaw_ADDR, stdReadRaw);
     hook_function(stdFGetc_ADDR, stdFGetc);
@@ -1401,7 +1404,17 @@ void do_hooks()
     hook_function(stdBmp_Load_ADDR, stdBmp_Load);
     hook_function(stdBmp_LoadEntryFromFile_ADDR, stdBmp_LoadEntryFromFile);
     hook_function(stdBmp_Write_ADDR, stdBmp_Write);
-    
+
+    // stdLbm
+    hook_function(stdLbm_Compress_ADDR, stdLbm_Compress);
+
+    // util
+    hook_function(util_FileExists_ADDR, util_FileExists);
+    hook_function(util_unkcomparison1_ADDR, util_RectsOverlap);
+    hook_function(util_unkcomparison2_ADDR, util_RectsOverlapExclusive);
+    hook_function(util_unkcomparison3_ADDR, util_RectUnion);
+    hook_function(util_Weirdchecksum_ADDR, util_Weirdchecksum);
+
     // sithStrTable
     hook_function(sithStrTable_Startup_ADDR, sithStrTable_Startup);
     hook_function(sithStrTable_Shutdown_ADDR, sithStrTable_Shutdown);
@@ -1680,6 +1693,10 @@ void do_hooks()
 
 #if 0
     // rdPuppet
+    hook_function(rdPuppet_FreeEntry_ADDR, rdPuppet_FreeEntry);
+    hook_function(rdPuppet_SetPause_ADDR, rdPuppet_SetPause);
+    hook_function(rdPuppet_SetTrackNoise_ADDR, rdPuppet_SetTrackNoise);
+    hook_function(rdPuppet_SetTrackPriority_ADDR, rdPuppet_SetTrackPriority);
     hook_function(rdPuppet_BuildJointMatrices_ADDR, rdPuppet_BuildJointMatrices);
     //hook_function(rdPuppet_UpdateTracks_ADDR, rdPuppet_UpdateTracks);
     hook_function(rdPuppet_AddTrack_ADDR, rdPuppet_AddTrack);
@@ -1843,7 +1860,9 @@ void do_hooks()
     hook_function(sithControl_Tick_ADDR, sithControl_Tick);
     hook_function(sithControl_AddInputHandler_ADDR, sithControl_AddInputHandler);
     hook_function(sithControl_HandlePlayer_ADDR, sithControl_HandlePlayer);
-    
+    hook_function(sithControl_SetFuncType_ADDR, sithControl_SetFuncType);
+    hook_function(sithControl_sub_4D7C30_ADDR, sithControl_ClearAllBindings);
+
     // sithPlayerActions
     hook_function(sithPlayerActions_Activate_ADDR, sithPlayerActions_Activate);
     hook_function(sithPlayerActions_JumpWithVel_ADDR, sithPlayerActions_JumpWithVel);
@@ -1887,12 +1906,18 @@ void do_hooks()
     // sithSector
     hook_function(sithAIAwareness_Startup_ADDR, sithAIAwareness_Startup);
     hook_function(sithAIAwareness_Shutdown_ADDR, sithAIAwareness_Shutdown);
-    hook_function(sithAIAwareness_sub_4F2B10_ADDR, sithAIAwareness_sub_4F2B10);
+    hook_function(sithAIAwareness_sub_4F2B10_ADDR, sithAIAwareness_FlushEntries);
     hook_function(sithPhysics_ApplyDrag_ADDR, sithPhysics_ApplyDrag);
     hook_function(sithPhysics_ThingPhysGeneral_ADDR, sithPhysics_ThingPhysGeneral);
     hook_function(sithPhysics_ThingPhysPlayer_ADDR, sithPhysics_ThingPhysPlayer);
     hook_function(sithRenderSky_Update_ADDR, sithRenderSky_Update);
+    hook_function(sithSector_New_ADDR, sithSector_New);
+    hook_function(sithSector_NewEntry_ADDR, sithSector_NewEntry);
     hook_function(sithSector_Free_ADDR, sithSector_Free);
+    hook_function(sithPlayer_Open_ADDR, sithPlayer_Open);
+    hook_function(sithPlayer_sub_4C93B0_ADDR, sithPlayer_SetBinItemActive);
+    hook_function(sithPlayer_sub_4C93F0_ADDR, sithPlayer_GetBinItemActive);
+    hook_function(sithPlayer_idk2_ADDR, sithPlayer_GetBinItemAvailable);
     hook_function(sithRenderSky_TransformHorizontal_ADDR, sithRenderSky_TransformHorizontal);
     hook_function(sithPhysics_ThingSetLook_ADDR, sithPhysics_ThingSetLook);
     hook_function(sithPhysics_ThingApplyForce_ADDR, sithPhysics_ThingApplyForce);
@@ -1988,7 +2013,7 @@ void do_hooks()
     hook_function(sithIntersect_sub_5090B0_ADDR, sithIntersect_sub_5090B0);
     hook_function(sithIntersect_sub_508400_ADDR, sithIntersect_sub_508400);
     hook_function(sithIntersect_sub_508990_ADDR, sithIntersect_sub_508990);
-    hook_function(sithIntersect_sub_508070_ADDR, sithIntersect_sub_508070);
+    hook_function(sithIntersect_sub_508070_ADDR, sithIntersect_CheckFaceIntersection);
 #endif
 
     // sithTime
@@ -2100,6 +2125,8 @@ void do_hooks()
     hook_function(sithPhysics_ThingTick_ADDR, sithPhysics_ThingTick);
     
     // sithSurface
+    hook_function(sithSurface_New_ADDR, sithSurface_New);
+    hook_function(sithSurface_sub_4E5AD0_ADDR, sithSurface_AllocateAdjoins);
     hook_function(sithSurface_Free_ADDR, sithSurface_Free);
     hook_function(sithSurface_SurfaceLightAnim_ADDR, sithSurface_SurfaceLightAnim);
     hook_function(sithSurface_SlideWall_ADDR, sithSurface_SlideWall);
@@ -2134,7 +2161,7 @@ void do_hooks()
     hook_function(sithTrackThing_RotatePivot_ADDR, sithTrackThing_RotatePivot);
     hook_function(sithTrackThing_Rotate_ADDR, sithTrackThing_Rotate);
     hook_function(sithTrackThing_Arrivedidk_ADDR, sithTrackThing_Arrivedidk);
-    hook_function(sithTrackThing_sub_4FACC0_ADDR, sithTrackThing_sub_4FACC0);
+    hook_function(sithTrackThing_sub_4FACC0_ADDR, sithTrackThing_CalcMoveDirection);
     hook_function(sithTrackThing_PrepareForOrient_ADDR, sithTrackThing_PrepareForOrient);
     hook_function(sithTrackThing_Tick_ADDR, sithTrackThing_Tick);
     hook_function(sithTrackThing_LoadPathParams_ADDR, sithTrackThing_LoadPathParams);
@@ -2193,6 +2220,8 @@ void do_hooks()
     hook_function(jkPlayer_SetRank_ADDR, jkPlayer_SetRank);
     
     // jkSaber
+    hook_function(jkSaber_Startup_ADDR, jkSaber_Startup);
+    hook_function(jkSaber_Shutdown_ADDR, jkSaber_Shutdown);
     hook_function(jkSaber_InitializeSaberInfo_ADDR, jkSaber_InitializeSaberInfo);
     hook_function(jkSaber_PolylineRand_ADDR, jkSaber_PolylineRand);
     hook_function(jkSaber_Draw_ADDR, jkSaber_Draw);
@@ -2279,9 +2308,9 @@ void do_hooks()
     hook_function(sithCollision_CollideHurt_ADDR, sithCollision_CollideHurt);
     hook_function(sithCollision_HasLos_ADDR, sithCollision_HasLos);
     hook_function(sithCollision_DebrisPlayerCollide_ADDR, sithCollision_DebrisPlayerCollide);
-    hook_function(sithCollision_sub_4E6FB0_ADDR, sithCollision_sub_4E6FB0);
-    hook_function(sithCollision_sub_4E7310_ADDR, sithCollision_sub_4E7310);
-    hook_function(sithCollision_sub_4E73F0_ADDR, sithCollision_sub_4E73F0);
+    hook_function(sithCollision_sub_4E6FB0_ADDR, sithCollision_RaycastFromCamera);
+    hook_function(sithCollision_sub_4E7310_ADDR, sithCollision_RaycastSector);
+    hook_function(sithCollision_sub_4E73F0_ADDR, sithCollision_CheckPathClear);
 #endif
     
     // sithActor
@@ -3018,6 +3047,10 @@ void do_hooks()
     hook_function_inv(rdKeyframe_FreeJoints_ADDR, rdKeyframe_FreeJoints);
 #endif
 #endif
+
+    // ========================================
+    // ========================================
+
 #endif // !NO_JK_MMAP
 }
 #endif // WIN64_STANDALONE

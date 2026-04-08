@@ -51,7 +51,7 @@ int sithAIAwareness_AddEntry(sithSector *sector, rdVector3 *pos, int32_t a3, fle
     return 1;
 }
 
-void sithAIAwareness_sub_4F2B10()
+void sithAIAwareness_FlushEntries()
 {
     if ( sithAIAwareness_numEntries )
     {

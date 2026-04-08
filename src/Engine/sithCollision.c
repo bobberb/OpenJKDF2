@@ -1301,7 +1301,7 @@ static sithCollisionSearchEntry* sithCollision_FindBestResult()
     return best;
 }
 
-sithThing* sithCollision_sub_4E6FB0(rdVector3 *pos)
+sithThing* sithCollision_RaycastFromCamera(rdVector3 *pos)
 {
     rdVector3 dir;
     rdVector3 camPos;
@@ -1335,7 +1335,7 @@ sithThing* sithCollision_sub_4E6FB0(rdVector3 *pos)
     return result;
 }
 
-sithThing* sithCollision_sub_4E7310(sithSector *sector, rdVector3 *startPos, rdVector3 *dir, flex_t dist, flex_t radius, uint32_t *pHitType)
+sithThing* sithCollision_RaycastSector(sithSector *sector, rdVector3 *startPos, rdVector3 *dir, flex_t dist, flex_t radius, uint32_t *pHitType)
 {
     sithCollision_SearchRadiusForThings(sector, NULL, startPos, dir, dist, radius, 0x103);
 
@@ -1354,7 +1354,7 @@ sithThing* sithCollision_sub_4E7310(sithSector *sector, rdVector3 *startPos, rdV
     return result;
 }
 
-int sithCollision_sub_4E73F0(sithSector *sector, rdVector3 *startPos, rdVector3 *endPos, flex_t radius)
+int sithCollision_CheckPathClear(sithSector *sector, rdVector3 *startPos, rdVector3 *endPos, flex_t radius)
 {
     rdVector3 dir;
     rdVector_Sub3(&dir, endPos, startPos);

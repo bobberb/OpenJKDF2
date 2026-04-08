@@ -69,7 +69,7 @@ int stdBmp_LoadEntryFromFile(const char *fpath, stdBitmap *bitmap, int create_dd
     _memset(bitmap, 0, sizeof(stdBitmap));
 
     // Copy filename
-    fname = stdFileFromPath(fpath);
+    fname = stdFileFromPath((char*)fpath);
 #ifndef OPTIMIZE_AWAY_UNUSED_FIELDS
     _strncpy(bitmap->fpath, fname, 31);
     bitmap->fpath[31] = 0;

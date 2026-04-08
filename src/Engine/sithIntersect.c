@@ -79,7 +79,7 @@ int sithIntersect_IsSphereInSector(const rdVector3 *pos, flex_t radius, sithSect
     return 1;
 }
 
-// sithIntersect_sub_508070
+// sithIntersect_CheckFaceIntersection
 
 int sithIntersect_CollideThings(sithThing *pThing, const rdVector3 *a2, const rdVector3 *a3, flex_t a4, flex_t range, sithThing *a6, int raycastFlags, flex_t *a8, rdMesh **outMesh, rdFace **a10, rdVector3 *a11)
 {
@@ -737,7 +737,7 @@ int sithIntersect_sub_5090B0(const rdVector3 *pStartPos, const rdVector3 *pRayDi
     return 0;
 }
 
-int sithIntersect_sub_508070(rdVector3 *a1, flex_t a2, rdFace *a3, rdVector3 *a4, rdVector3 *pProjectedOut)
+int sithIntersect_CheckFaceIntersection(rdVector3 *a1, flex_t a2, rdFace *a3, rdVector3 *a4, rdVector3 *pProjectedOut)
 {
     int side = 0;
     int result = sithIntersect_sub_508750(a1, a2, a3, a4, &side);

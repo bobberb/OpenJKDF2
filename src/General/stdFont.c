@@ -1286,18 +1286,19 @@ int stdFont_sub_4356B0(const wchar_t *text, stdFont *font, int *pMaxWidth)
 {
     int maxWidth = 0;
     const wchar_t *p = text;
+    int charsRemaining = 0;
 
     if ( !text )
         return maxWidth;
 
     do
     {
-        p = stdFont_sub_4352C0(p, font, *pMaxWidth, (rdRect*)pMaxWidth, (int*)&text);
+        p = stdFont_sub_4352C0(p, font, *pMaxWidth, (rdRect*)pMaxWidth, &charsRemaining);
 
         int lineWidth = 0;
         uint16_t ch = *p;
         const wchar_t *iter = p;
-        int remaining = (int)text;
+        int remaining = charsRemaining;
 
         while ( ch && remaining > 0 )
         {
