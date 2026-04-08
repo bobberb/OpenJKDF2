@@ -2114,6 +2114,8 @@ void do_hooks()
     hook_function(sithPhysics_ThingTick_ADDR, sithPhysics_ThingTick);
     
     // sithSurface
+    hook_function(sithSurface_New_ADDR, sithSurface_New);
+    hook_function(sithSurface_sub_4E5AD0_ADDR, sithSurface_AllocateAdjoins);
     hook_function(sithSurface_Free_ADDR, sithSurface_Free);
     hook_function(sithSurface_SurfaceLightAnim_ADDR, sithSurface_SurfaceLightAnim);
     hook_function(sithSurface_SlideWall_ADDR, sithSurface_SlideWall);
