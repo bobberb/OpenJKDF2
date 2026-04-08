@@ -1684,6 +1684,10 @@ void do_hooks()
 
 #if 0
     // rdPuppet
+    hook_function(rdPuppet_FreeEntry_ADDR, rdPuppet_FreeEntry);
+    hook_function(rdPuppet_SetPause_ADDR, rdPuppet_SetPause);
+    hook_function(rdPuppet_SetTrackNoise_ADDR, rdPuppet_SetTrackNoise);
+    hook_function(rdPuppet_SetTrackPriority_ADDR, rdPuppet_SetTrackPriority);
     hook_function(rdPuppet_BuildJointMatrices_ADDR, rdPuppet_BuildJointMatrices);
     //hook_function(rdPuppet_UpdateTracks_ADDR, rdPuppet_UpdateTracks);
     hook_function(rdPuppet_AddTrack_ADDR, rdPuppet_AddTrack);
@@ -2197,6 +2201,8 @@ void do_hooks()
     hook_function(jkPlayer_SetRank_ADDR, jkPlayer_SetRank);
     
     // jkSaber
+    hook_function(jkSaber_Startup_ADDR, jkSaber_Startup);
+    hook_function(jkSaber_Shutdown_ADDR, jkSaber_Shutdown);
     hook_function(jkSaber_InitializeSaberInfo_ADDR, jkSaber_InitializeSaberInfo);
     hook_function(jkSaber_PolylineRand_ADDR, jkSaber_PolylineRand);
     hook_function(jkSaber_Draw_ADDR, jkSaber_Draw);

@@ -53,6 +53,34 @@ void rdPuppet_Free(rdPuppet *puppet)
     rdroid_pHS->free(puppet);
 }
 
+void rdPuppet_FreeEntry()
+{
+}
+
+void rdPuppet_SetPause(rdPuppet *puppet, int paused)
+{
+    puppet->paused = paused;
+}
+
+void rdPuppet_SetTrackNoise(rdPuppet *puppet, int trackNum, flex_t noise)
+{
+    if ( noise != 0.0f )
+    {
+        puppet->tracks[trackNum].status |= 0x1000;
+    }
+    else
+    {
+        puppet->tracks[trackNum].status &= ~0x1000;
+    }
+    puppet->tracks[trackNum].field_120 = noise;
+}
+
+void rdPuppet_SetTrackPriority(rdPuppet *puppet, int trackNum, int lowPri, int highPri)
+{
+    puppet->tracks[trackNum].lowPri = lowPri;
+    puppet->tracks[trackNum].highPri = highPri;
+}
+
 // MOTS altered
 void rdPuppet_BuildJointMatrices(rdThing *thing, rdMatrix34 *matrix)
 {
