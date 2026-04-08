@@ -1023,8 +1023,8 @@ void do_hooks()
 
     // sithMulti
     hook_function(sithMulti_map_init_related_ADDR, sithMulti_map_init_related);
-    hook_function(sithMulti_sub_4CA3B0_ADDR, sithMulti_sub_4CA3B0);
-    hook_function(sithMulti_sub_4CA410_ADDR, sithMulti_sub_4CA410);
+    hook_function(sithMulti_sub_4CA3B0_ADDR, sithMulti_ResetNetState);
+    hook_function(sithMulti_sub_4CA410_ADDR, sithMulti_CleanupThings);
     hook_function(sithMulti_sendmsgidk4_ADDR, sithMulti_sendmsgidk4);
     hook_function(sithMulti_ProcessJoin_unused_ADDR, sithMulti_ProcessJoin_unused);
     hook_function(sithMulti_Send36_ADDR, sithMulti_Send36);
@@ -1896,7 +1896,7 @@ void do_hooks()
     // sithSector
     hook_function(sithAIAwareness_Startup_ADDR, sithAIAwareness_Startup);
     hook_function(sithAIAwareness_Shutdown_ADDR, sithAIAwareness_Shutdown);
-    hook_function(sithAIAwareness_sub_4F2B10_ADDR, sithAIAwareness_sub_4F2B10);
+    hook_function(sithAIAwareness_sub_4F2B10_ADDR, sithAIAwareness_FlushEntries);
     hook_function(sithPhysics_ApplyDrag_ADDR, sithPhysics_ApplyDrag);
     hook_function(sithPhysics_ThingPhysGeneral_ADDR, sithPhysics_ThingPhysGeneral);
     hook_function(sithPhysics_ThingPhysPlayer_ADDR, sithPhysics_ThingPhysPlayer);
@@ -2000,7 +2000,7 @@ void do_hooks()
     hook_function(sithIntersect_sub_5090B0_ADDR, sithIntersect_sub_5090B0);
     hook_function(sithIntersect_sub_508400_ADDR, sithIntersect_sub_508400);
     hook_function(sithIntersect_sub_508990_ADDR, sithIntersect_sub_508990);
-    hook_function(sithIntersect_sub_508070_ADDR, sithIntersect_sub_508070);
+    hook_function(sithIntersect_sub_508070_ADDR, sithIntersect_CheckFaceIntersection);
 #endif
 
     // sithTime
@@ -2146,7 +2146,7 @@ void do_hooks()
     hook_function(sithTrackThing_RotatePivot_ADDR, sithTrackThing_RotatePivot);
     hook_function(sithTrackThing_Rotate_ADDR, sithTrackThing_Rotate);
     hook_function(sithTrackThing_Arrivedidk_ADDR, sithTrackThing_Arrivedidk);
-    hook_function(sithTrackThing_sub_4FACC0_ADDR, sithTrackThing_sub_4FACC0);
+    hook_function(sithTrackThing_sub_4FACC0_ADDR, sithTrackThing_CalcMoveDirection);
     hook_function(sithTrackThing_PrepareForOrient_ADDR, sithTrackThing_PrepareForOrient);
     hook_function(sithTrackThing_Tick_ADDR, sithTrackThing_Tick);
     hook_function(sithTrackThing_LoadPathParams_ADDR, sithTrackThing_LoadPathParams);
@@ -2293,9 +2293,9 @@ void do_hooks()
     hook_function(sithCollision_CollideHurt_ADDR, sithCollision_CollideHurt);
     hook_function(sithCollision_HasLos_ADDR, sithCollision_HasLos);
     hook_function(sithCollision_DebrisPlayerCollide_ADDR, sithCollision_DebrisPlayerCollide);
-    hook_function(sithCollision_sub_4E6FB0_ADDR, sithCollision_sub_4E6FB0);
-    hook_function(sithCollision_sub_4E7310_ADDR, sithCollision_sub_4E7310);
-    hook_function(sithCollision_sub_4E73F0_ADDR, sithCollision_sub_4E73F0);
+    hook_function(sithCollision_sub_4E6FB0_ADDR, sithCollision_RaycastFromCamera);
+    hook_function(sithCollision_sub_4E7310_ADDR, sithCollision_RaycastSector);
+    hook_function(sithCollision_sub_4E73F0_ADDR, sithCollision_CheckPathClear);
 #endif
     
     // sithActor

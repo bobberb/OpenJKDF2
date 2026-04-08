@@ -1497,7 +1497,7 @@ int sithMulti_map_init_related()
     return 1;
 }
 
-int sithMulti_sub_4CA3B0()
+int sithMulti_ResetNetState()
 {
     sithNet_isMulti = 0;
     sithNet_isServer = 1;
@@ -1518,7 +1518,7 @@ int sithMulti_sub_4CA3B0()
     return 1;
 }
 
-void sithMulti_sub_4CA410(sithWorld *pWorld)
+void sithMulti_CleanupThings(sithWorld *pWorld)
 {
     int idx = 0;
     sithMulti_dword_83265C = 0;

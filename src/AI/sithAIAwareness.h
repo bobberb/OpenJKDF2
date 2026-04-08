@@ -14,7 +14,7 @@
 int sithAIAwareness_Startup();
 void sithAIAwareness_Shutdown();
 int sithAIAwareness_AddEntry(sithSector *sector, rdVector3 *pos, int32_t a3, flex_t a4, sithThing *thing);
-void sithAIAwareness_sub_4F2B10();
+void sithAIAwareness_FlushEntries();
 int sithAIAwareness_Tick(int32_t a, sithEventInfo* b);
 void sithAIAwareness_sub_4F2C30(sithSectorEntry *pSectorEntry, sithSector *pSector, rdVector3 *pPos1, rdVector3 *pPos2, flex_t a5, flex_t a6, sithThing *pThing);
 
