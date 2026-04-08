@@ -19,7 +19,7 @@ ExternalProject_Add(
     INSTALL_DIR         ${PHYSFS_ROOT}
     UPDATE_DISCONNECTED TRUE
     CMAKE_ARGS          --toolchain ${CMAKE_TOOLCHAIN_FILE}
-                        --install-prefix ${PHYSFS_ROOT}
+                        --install-prefix ${PHYSFS_ROOT} -DCMAKE_INSTALL_LIBDIR=lib
                         -DCMAKE_BUILD_TYPE:STRING=Release
                         -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                         -DPHYSFS_BUILD_STATIC:BOOL=TRUE

@@ -26,7 +26,7 @@ ExternalProject_Add(
     INSTALL_DIR         ${OPENAL_ROOT}
     UPDATE_DISCONNECTED TRUE
     CMAKE_ARGS          --toolchain ${CMAKE_TOOLCHAIN_FILE}
-                        --install-prefix ${OPENAL_ROOT}
+                        --install-prefix ${OPENAL_ROOT} -DCMAKE_INSTALL_LIBDIR=lib
                         -DCMAKE_BUILD_TYPE:STRING=Release
                         -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                         -DALSOFT_UTILS:BOOL=FALSE

@@ -3018,6 +3018,10 @@ void do_hooks()
     hook_function_inv(rdKeyframe_FreeJoints_ADDR, rdKeyframe_FreeJoints);
 #endif
 #endif
+
+    // ========================================
+    // ========================================
+
 #endif // !NO_JK_MMAP
 }
 #endif // WIN64_STANDALONE

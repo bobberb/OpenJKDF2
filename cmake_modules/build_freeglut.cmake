@@ -16,7 +16,7 @@ if (TARGET_COMPILE_FREEGLUT)
         INSTALL_DIR         ${FreeGLUT_ROOT}
         UPDATE_DISCONNECTED TRUE
         CMAKE_ARGS          --toolchain ${CMAKE_TOOLCHAIN_FILE}
-                            --install-prefix ${FreeGLUT_ROOT}
+                            --install-prefix ${FreeGLUT_ROOT} -DCMAKE_INSTALL_LIBDIR=lib
                             -DCMAKE_BUILD_TYPE:STRING=Release
                             -DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}
                             -DFREEGLUT_BUILD_STATIC_LIBS:BOOL=FALSE
